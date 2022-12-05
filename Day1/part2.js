@@ -16,4 +16,4 @@ sums.sort((a, b) => {
 });
 
 let solution = sums[0] + sums[1] + sums[2];
-console.log(solution);
+console.log(solution); // 207968

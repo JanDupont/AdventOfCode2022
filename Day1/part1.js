@@ -11,4 +11,4 @@ for (let number of split) {
 		temp = 0;
 	}
 }
-console.log(biggestCalories);
+console.log(biggestCalories); // 69836
