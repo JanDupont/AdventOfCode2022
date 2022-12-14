@@ -7,13 +7,20 @@ let currentPosition = filesTree["/"];
 let directoryHistory = [];
 let resultSum = 0;
 
+// PART 1
 buildFileTree();
 directoryHistory = ["/"];
 currentPosition = getPos(directoryHistory);
 setDirectorySizes(currentPosition);
-
+console.log(resultSum); // 1449447
 //console.log(JSON.stringify(filesTree, null, 2));
-console.log(resultSum);
+
+// PART 2
+let spaceToClear = 30000000 - (70000000 - filesTree["/"].size);
+let root = getPos(["/"]);
+let smallestDirToClear = root;
+getSmallestDirToClear(root);
+console.log(smallestDirToClear.size); // 8679207
 
 function buildFileTree() {
 	let command = "";
@@ -78,4 +85,12 @@ function setDirectorySizes(position) {
 	}
 	if (position.size <= 100000) resultSum += position.size;
 	return position.size;
+}
+
+function getSmallestDirToClear(position) {
+	for (let dir of Object.keys(position.directories)) {
+		let pos = position.directories[dir];
+		getSmallestDirToClear(pos);
+	}
+	if (position.size > spaceToClear && position.size < smallestDirToClear.size) smallestDirToClear = position;
 }
